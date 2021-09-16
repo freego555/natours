@@ -79,14 +79,21 @@ app.patch('/api/v1/tours/:id', (req, res) => {
 
   const id = req.params.id * 1;
 
-  if (id > tours.length - 1) {
+  let indexToPatch = -1;
+  tours.forEach((el, i) => {
+    if (el.id === id) {
+      indexToPatch = i;
+    }
+  });
+
+  if (indexToPatch === -1) {
     return res.status(404).json({
       status: 'fail',
       message: 'Invalid ID',
     });
   }
 
-  tours[id] = Object.assign(tours[id], req.body);
+  tours[indexToPatch] = Object.assign(tours[indexToPatch], req.body);
 
   fs.writeFile(
     `${__dirname}/dev-data/data/tours-simple.json`,
@@ -96,7 +103,7 @@ app.patch('/api/v1/tours/:id', (req, res) => {
       res.status(200).json({
         status: 'success',
         data: {
-          tour: tours[id],
+          tour: tours[indexToPatch],
         },
       });
     }
