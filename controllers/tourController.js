@@ -4,6 +4,21 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`, 'utf-8')
 );
 
+exports.checkID = (req, res, next, val) => {
+  console.log(`Tour id is: ${val}`);
+
+  const id = val * 1;
+  const tour = tours.find((el) => el.id === id);
+
+  if (!tour) {
+    return res.status(404).json({
+      status: 'fail',
+      message: `Invalid ID`,
+    });
+  }
+  next();
+};
+
 exports.getAllTours = (req, res) => {
   console.log(req.requestTime);
 
@@ -21,13 +36,6 @@ exports.getTourById = (req, res) => {
   const id = req.params.id * 1;
 
   const tour = tours.find((el) => el.id === id);
-
-  if (!tour) {
-    return res.status(404).json({
-      status: 'fail',
-      message: `Invalid ID`,
-    });
-  }
 
   res.status(200).json({
     status: 'success',
@@ -67,13 +75,6 @@ exports.updateTourById = (req, res) => {
     }
   });
 
-  if (indexToPatch === -1) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Invalid ID',
-    });
-  }
-
   tours[indexToPatch] = Object.assign(tours[indexToPatch], req.body);
 
   fs.writeFile(
@@ -100,13 +101,6 @@ exports.deleteTourById = (req, res) => {
       indexToDelete = i;
     }
   });
-
-  if (indexToDelete === -1) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Invalid ID',
-    });
-  }
 
   tours.splice(indexToDelete, 1);
 
