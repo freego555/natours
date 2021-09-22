@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/newline-after-import
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 
