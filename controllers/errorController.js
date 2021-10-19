@@ -5,6 +5,13 @@ const handleCastErrorDB = (err) => {
   return new AppError(message, 400);
 };
 
+const handleDuplicateFieldsDB = (err) => {
+  const key = Object.keys(err.keyValue)[0];
+  const value = err.keyValue[key];
+  const message = `Value "${value}" in field "${key}" is not unique`;
+  return new AppError(message, 400);
+};
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -44,6 +51,7 @@ module.exports = (err, req, res, next) => {
     let appError = { ...err };
 
     if (err.name === 'CastError') appError = handleCastErrorDB(appError);
+    else if (err.code === 11000) appError = handleDuplicateFieldsDB(appError);
 
     sendErrorProd(appError, res);
   }
