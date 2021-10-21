@@ -1,8 +1,14 @@
+const mongoose = require('mongoose');
 // eslint-disable-next-line import/newline-after-import
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 
-const mongoose = require('mongoose');
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION! Shutting down...');
+  console.error(err);
+  process.exit(1);
+});
+
 const app = require('./app');
 
 const DB = process.env.DATABASE.replace(
@@ -23,8 +29,8 @@ const server = app.listen(port, () => {
 });
 
 process.on('unhandledRejection', (err) => {
-  console.log(err.name, err.message);
-  console.log('UNHANDLED REJECTION! Shutting down...');
+  console.error('UNHANDLED REJECTION! Shutting down...');
+  console.error(err);
   server.close(() => {
     process.exit(1);
   });
