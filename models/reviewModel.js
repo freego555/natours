@@ -17,7 +17,7 @@ const reviewSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
     },
     tour: {
       type: mongoose.Schema.ObjectId,
@@ -44,9 +44,9 @@ reviewSchema.pre(/^find/, function (next) {
     //     select: 'name',
     //   })
     .populate({
-    path: 'user',
-    select: 'name photo',
-  });
+      path: 'user',
+      select: 'name photo',
+    });
 
   next();
 });
