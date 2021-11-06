@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
+const Tour = require('./tourModel');
 
 const reviewSchema = new mongoose.Schema(
   {
     review: {
       type: String,
       required: [true, 'Please, write your review.'],
-      minlength: [10, 'Review text should be more than 10 symbols.'],
+      minlength: [5, 'Review text should be more than 5 symbols.'],
       maxlength: [1024, 'Review text should be less than 1000 symbols.'],
       trim: true,
     },
@@ -51,7 +52,50 @@ reviewSchema.pre(/^find/, function (next) {
   next();
 });
 
+reviewSchema.statics.calcAverageRatings = async function (tourId) {
+  const stats = await this.aggregate([
+    {
+      $match: { tour: tourId },
+    },
+    {
+      $group: {
+        _id: '$tour',
+        nRating: { $sum: 1 },
+        avgRating: { $avg: '$rating' },
+      },
+    },
+  ]);
+
+  if (stats.length > 0) {
+    await Tour.findByIdAndUpdate(tourId, {
+      ratingsQuantity: stats[0].nRating,
+      ratingsAverage: stats[0].avgRating,
+    });
+  } else {
+    await Tour.findByIdAndUpdate(tourId, {
+      ratingsQuantity: 0,
+      ratingsAverage: 4.5,
+    });
+  }
+};
+
+reviewSchema.post('save', async function () {
+  // `this` points to current review
+  // `this.constructor` points to current model
+  await this.constructor.calcAverageRatings(this.tour);
+});
+
+// findByIdAndUpdate
+// findByIdAndDelete
+reviewSchema.pre(/^findOneAnd/, async function (next) {
+  this.r = await this.model.findOne(this.getQuery());
+  next();
+});
+
+reviewSchema.post(/^findOneAnd/, async function () {
+  if (this.r) await this.r.constructor.calcAverageRatings(this.r.tour);
+});
+
 const Review = mongoose.model('Review', reviewSchema);
 
-// review / rating / createdAt / ref to tour / ref to user
 module.exports = Review;
