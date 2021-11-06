@@ -172,14 +172,16 @@ tourSchema.post(/^find/, function (docs, next) {
 });
 
 // AGGREGATION MIDDLEWARE
-// tourSchema.pre('aggregate', function (next) {
-//   this.pipeline().unshift({
-//     $match: { secretTour: { $ne: true } },
-//   });
+tourSchema.pre('aggregate', function (next) {
+  const pipeline = this.pipeline();
+  if (pipeline.length > 0 && !pipeline[0].hasOwnProperty('$geoNear')) {
+    pipeline.unshift({
+      $match: { secretTour: { $ne: true } },
+    });
+  }
 
-//   console.log(this);
-//   next();
-// });
+  next();
+});
 
 const Tour = mongoose.model('Tour', tourSchema);
 
