@@ -1,8 +1,17 @@
 const nodemailer = require('nodemailer');
 
-const sendEmail = async (options) => {
-  // 1) Create a transporter
-  const transporter = nodemailer.createTransport({
+const createTransport = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return nodemailer.createTransport({
+      service: 'SendGrid',
+      auth: {
+        user: process.env.SENDGRID_USERNAME,
+        pass: process.env.SENDGRID_PASSWORD,
+      },
+    });
+  }
+
+  return nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
     auth: {
@@ -10,10 +19,15 @@ const sendEmail = async (options) => {
       pass: process.env.EMAIL_PASSWORD,
     },
   });
+};
+
+const sendEmail = async (options) => {
+  // 1) Create a transporter
+  const transporter = createTransport();
 
   // 2) Define the email options
   const mailOptions = {
-    from: 'Ihor Rohovets <ihor.rohovets@gmail.com>',
+    from: 'Natours Info <orkrist-555@ukr.net>',
     to: options.email,
     subject: options.subject,
     text: options.message,
