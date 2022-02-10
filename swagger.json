@@ -1,0 +1,1047 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Natours",
+    "description": "The Natours API contains endpoint for Tours, Users and Reviews.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://natours-freego.herokuapp.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Tours",
+      "description": "You can get all tours, create new ones, edit and delete tours. There are also special endpoints for some special requirements."
+    },
+    {
+      "name": "Reviews"
+    },
+    {
+      "name": "Tours/Reviews"
+    },
+    {
+      "name": "Users"
+    },
+    {
+      "name": "Authentication"
+    }
+  ],
+  "paths": {
+    "/api/v1/tours": {
+      "get": {
+        "tags": ["Tours"],
+        "summary": "Get All Tours",
+        "description": "Use this endpoint to get all the tours.",
+        "responses": {
+          "undefined": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "results": 2,
+                  "data": {
+                    "data": [
+                      {
+                        "startLocation": {
+                          "type": "Point",
+                          "coordinates": [-80.185942, 25.774772],
+                          "description": "Miami, USA",
+                          "address": "301 Biscayne Blvd, Miami, FL 33132, USA"
+                        },
+                        "ratingsAverage": 4.8,
+                        "ratingsQuantity": 6,
+                        "images": [
+                          "tour-2-1.jpg",
+                          "tour-2-2.jpg",
+                          "tour-2-3.jpg"
+                        ],
+                        "startDates": [
+                          "2021-06-19T09:00:00.000Z",
+                          "2021-07-20T09:00:00.000Z",
+                          "2021-08-18T09:00:00.000Z"
+                        ],
+                        "secretTour": false,
+                        "guides": [
+                          {
+                            "role": "lead-guide",
+                            "_id": "5c8a22c62f8fb814b56fa18b",
+                            "name": "Miyah Myles",
+                            "email": "miyah@example.com",
+                            "photo": "user-12.jpg"
+                          },
+                          {
+                            "role": "guide",
+                            "_id": "5c8a1f4e2f8fb814b56fa185",
+                            "name": "Jennifer Hardy",
+                            "email": "jennifer@example.com",
+                            "photo": "user-6.jpg"
+                          }
+                        ],
+                        "_id": "5c88fa8cf4afda39709c2955",
+                        "name": "The Sea Explorer",
+                        "duration": 7,
+                        "maxGroupSize": 15,
+                        "difficulty": "medium",
+                        "price": 497,
+                        "summary": "Exploring the jaw-dropping US east coast by foot and by boat",
+                        "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                        "imageCover": "tour-2-cover.jpg",
+                        "locations": [
+                          {
+                            "type": "Point",
+                            "coordinates": [-80.128473, 25.781842],
+                            "_id": "5c88fa8cf4afda39709c2959",
+                            "description": "Lummus Park Beach",
+                            "day": 1
+                          },
+                          {
+                            "type": "Point",
+                            "coordinates": [-80.647885, 24.909047],
+                            "_id": "5c88fa8cf4afda39709c2958",
+                            "description": "Islamorada",
+                            "day": 2
+                          },
+                          {
+                            "type": "Point",
+                            "coordinates": [-81.0784, 24.707496],
+                            "_id": "5c88fa8cf4afda39709c2957",
+                            "description": "Sombrero Beach",
+                            "day": 3
+                          },
+                          {
+                            "type": "Point",
+                            "coordinates": [-81.768719, 24.552242],
+                            "_id": "5c88fa8cf4afda39709c2956",
+                            "description": "West Key",
+                            "day": 5
+                          }
+                        ],
+                        "slug": "the-sea-explorer",
+                        "durationWeeks": 1,
+                        "id": "5c88fa8cf4afda39709c2955"
+                      },
+                      {
+                        "startLocation": {
+                          "type": "Point",
+                          "coordinates": [-115.570154, 51.178456],
+                          "description": "Banff, CAN",
+                          "address": "224 Banff Ave, Banff, AB, Canada"
+                        },
+                        "ratingsAverage": 5,
+                        "ratingsQuantity": 9,
+                        "images": [
+                          "tour-1-1.jpg",
+                          "tour-1-2.jpg",
+                          "tour-1-3.jpg"
+                        ],
+                        "startDates": [
+                          "2021-04-25T09:00:00.000Z",
+                          "2021-07-20T09:00:00.000Z",
+                          "2021-10-05T09:00:00.000Z"
+                        ],
+                        "secretTour": false,
+                        "guides": [
+                          {
+                            "role": "lead-guide",
+                            "_id": "5c8a21d02f8fb814b56fa189",
+                            "name": "Steve T. Scaife",
+                            "email": "steve@example.com",
+                            "photo": "user-10.jpg"
+                          },
+                          {
+                            "role": "guide",
+                            "_id": "5c8a201e2f8fb814b56fa186",
+                            "name": "Kate Morrison",
+                            "email": "kate@example.com",
+                            "photo": "user-7.jpg"
+                          },
+                          {
+                            "role": "guide",
+                            "_id": "5c8a1f292f8fb814b56fa184",
+                            "name": "Leo Gillespie",
+                            "email": "leo@example.com",
+                            "photo": "user-5.jpg"
+                          }
+                        ],
+                        "_id": "5c88fa8cf4afda39709c2951",
+                        "name": "The Forest Hiker",
+                        "duration": 5,
+                        "maxGroupSize": 25,
+                        "difficulty": "easy",
+                        "price": 397,
+                        "summary": "Breathtaking hike through the Canadian Banff National Park",
+                        "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        "imageCover": "tour-1-cover.jpg",
+                        "locations": [
+                          {
+                            "type": "Point",
+                            "coordinates": [-116.214531, 51.417611],
+                            "_id": "5c88fa8cf4afda39709c2954",
+                            "description": "Banff National Park",
+                            "day": 1
+                          },
+                          {
+                            "type": "Point",
+                            "coordinates": [-118.076152, 52.875223],
+                            "_id": "5c88fa8cf4afda39709c2953",
+                            "description": "Jasper National Park",
+                            "day": 3
+                          },
+                          {
+                            "type": "Point",
+                            "coordinates": [-117.490309, 51.261937],
+                            "_id": "5c88fa8cf4afda39709c2952",
+                            "description": "Glacier National Park of Canada",
+                            "day": 5
+                          }
+                        ],
+                        "slug": "the-forest-hiker",
+                        "durationWeeks": 0.7142857142857143,
+                        "id": "5c88fa8cf4afda39709c2951"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Tours"],
+        "summary": "Create New Tour",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Test Tour 0000001",
+                  "duration": 4,
+                  "maxGroupSize": 10,
+                  "difficulty": "easy",
+                  "price": 997,
+                  "summary": "Test tour",
+                  "imageCover": "tour-3-cover.jpg"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tours/{tourId}": {
+      "get": {
+        "tags": ["Tours"],
+        "summary": "Get Tour By Id",
+        "parameters": [
+          {
+            "name": "tourId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "5c88fa8cf4afda39709c2955"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Tours"],
+        "summary": "Update Tour By Id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "price": 497
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "tourId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "5c88fa8cf4afda39709c2955"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Tours"],
+        "summary": "Delete Tour",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "tourId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "61811788297d413da0e15694"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tours/top-5-cheap": {
+      "get": {
+        "tags": ["Tours"],
+        "summary": "Get Top 5 Best and Cheap Tours",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tours/tour-stats": {
+      "get": {
+        "tags": ["Tours"],
+        "summary": "Get Tours Stats",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tours/monthly-plan/{year}": {
+      "get": {
+        "tags": ["Tours"],
+        "summary": "Get Tours Monthly Plan",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "year",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "2022"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tours/tours-within/{distance}/center/{latlng}/unit/{unit}": {
+      "get": {
+        "tags": ["Tours"],
+        "summary": "Get Tours Within Radius",
+        "parameters": [
+          {
+            "name": "distance",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "400"
+          },
+          {
+            "name": "latlng",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true,
+            "example": "34.49174806670041,-117.31304513022658"
+          },
+          {
+            "name": "unit",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "km"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tours/distances/{latlng}/unit/{unit}": {
+      "get": {
+        "tags": ["Tours"],
+        "summary": "Get Distances to Tours From Point",
+        "parameters": [
+          {
+            "name": "latlng",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true,
+            "example": "34.49174806670041,-117.31304513022658"
+          },
+          {
+            "name": "unit",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "mi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reviews": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Get All Reviews",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Reviews"],
+        "summary": "Create New Review",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "review": "It was great!",
+                  "rating": 5,
+                  "tour": "5c88fa8cf4afda39709c295d"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reviews/{reviewId}": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Get Review by Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "61829eefb8d82e370b82fdaf"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Reviews"],
+        "summary": "Delete Review by Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "6186655c8b658a7784a70f0a"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Reviews"],
+        "summary": "Update Review by Id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "rating": 4
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "618663805dd99a636ffea142"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tours/{tourId}/reviews": {
+      "get": {
+        "tags": ["Tours/Reviews"],
+        "summary": "Get All Reviews on Tour",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "tourId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "5c88fa8cf4afda39709c2951"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Tours/Reviews"],
+        "summary": "Create New Review on Tour",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "review": "Very good!",
+                  "rating": 5
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "tourId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "6183cdf8378c181b64b5cc24"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get All Users",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{userId}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get User By Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "61767c815be48611246be3b5"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Update User By Id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Bob Smith"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "61767c815be48611246be3b5"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete User By Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "618284f3418437382b525d21"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/me": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get Current User",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/updateMe": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Update Current User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Bob Smith",
+                  "email": "user@example.com"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/deleteMe": {
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete Current User",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/signup": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Sign Up",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Test User",
+                  "email": "user@example.com",
+                  "password": "{{password}}",
+                  "passwordConfirm": "{{password}}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Log In",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "user@example.com",
+                  "password": "{{password}}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/forgotPassword": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Forgot password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "user@example.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/resetPassword/{token}": {
+      "patch": {
+        "tags": ["Authentication"],
+        "summary": "Reset password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "password": "password",
+                  "passwordConfirm": "password"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "1aab9c37a5bcc86a51ea5764204d62cf9f0214881dbb6f7067536ecc4c851607"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/updateMyPassword": {
+      "patch": {
+        "tags": ["Authentication"],
+        "summary": "Update Current User Password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "password": "{{password}}",
+                  "newPassword": "newpassword",
+                  "newPasswordConfirm": "newpassword"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
