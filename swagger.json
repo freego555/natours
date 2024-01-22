@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://natours-freego.herokuapp.com"
+      "url": "/"
     }
   ],
   "components": {
